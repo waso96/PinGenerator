@@ -35,11 +35,24 @@
               test: Modernizr.flexbox,
               nope : 'css/ink-legacy.min.css'
             });
+            Ink.requireModules(['Ink.Dom.Loaded_1'], function (DomLoaded) { 
+              DomLoaded.run(function(){
+                  alert('DOM is Ready');
+              });
+            });  
         </script>
 
-        <script type="text/javascript" src="js/holder.js"></script>
         <script type="text/javascript" src="js/ink-all.min.js"></script>
         <script type="text/javascript" src="js/autoload.js"></script>
+        <script type="text/javascript" src="js/pingen.js"></script>
+        <script type="text/javascript">
+            Ink.requireModules(['Ink.Dom.Loaded_1','Ink.Util.Url_1'], function (DomLoaded,InkUrl) { 
+              DomLoaded.run(function(){
+            	  url = InkUrl.getUrl();
+                  alert(window.url);
+              });
+            });  
+        </script>
     </head>
 
     <body>
@@ -68,25 +81,23 @@
 </div>
 <div>&nbsp;</div>
 
-
 <div class="ink-grid">
   <div class="column-group">
     <div class="menu-left">
 <nav class="ink-navigation vertical-space">
-    <ul class="menu vertical black">
-        <li class="heading active"><a href="#">Pin Generator</a></li>
+    <ul class="menu vertical blue">
+        <li class="heading active"><a><i class="fa fa-credit-card"></i>&nbsp;&nbsp;&nbsp;Pin Generator</a></li>
         <li class="submenu">
-            <a href="#">Generate PIN<i class="fa fa-chevron-right push-right space-top-font"></i></a>
-            <ul class="submenu flyout right">
-                <li><a href="#">Batch</a></li>
-                <li><a href="#">Specific PIN</a></li>
+            <a>Generate PIN<i class="fa fa-chevron-right push-right space-top-font"></i></a>
+            <ul class="submenu flyout right" style="background:#ddd;color:white;">
+                <li><a onclick="menuPinGenBatch();">Batch</a></li>
+                <li><a onclick="menuPinGenSpecific();">Specific PIN</a></li>
             </ul>
         </li>
         <li><a href="#">Compare PIN</a></li>
-        <li><a href="#">Export PIN</a></li>
-        <li class="separator-above"><a href="#">User Admin</a></li>
-        <li><a href="#">Audit Log</a></li>
-        <li class="disabled"><a href="#">About</a></li>
+        <li><a>Export PIN</a></li>
+        <li class="separator-above disabled"><a>User Admin</a></li>
+        <li class="disabled"><a>Audit Log</a></li>
 
     </ul>
 </nav>
@@ -94,315 +105,14 @@
 
     <div class="panel-main">    
 <div class="ink-grid vertical-space">
-   <div class="panel">
-   <div id="main-panel">
-
-<div class="control-group">
-<div class="all-33">&nbsp;</div>
-<div class="all-33">
-<form class="ink-form vertical-space">
-<label for="pin-digit">Pin Digit</label>
-<div class="control">
-<select id="pin-digit" style="width:15em;">
-  <option value="15">15</option>
-  <option value="14">14</option>
-  <option value="13">13</option>
-  <option value="12">12</option>
-</select>
+<div class="panel">
+   <div id="main-panel">XXX</div>
 </div>
-	<div class="space"></div>
-	<label for="pin-amount">No. of Pin</label>
-	<div class="control">
-	    <input id="pin-amount" name="pin-amount" style="width:15em;" type="text" placeholder="No. of Pin">
-	</div>
-
-	<div class="space"></div>
-	<input type="submit" value="Generate" class="ink-button green">
-	<input type="submit" value="Cancel" class="ink-button red">
-</form>
-
-
-</div>
-<div class="all-33">&nbsp;</div>
-</div>
-
-   
-
-<script>
-Ink.requireModules(['Ink.Net.Ajax_1', 'Ink.Dom.Event_1', 'Ink.Dom.FormSerialize_1'], function(Ajax, InkEvent, FormSerialize) {
-
-    var form = Ink.i('form');
-  
-    function doPost(event) {
-        InkEvent.stopDefault(event);
-
-        var formData = FormSerialize.serialize(form);
-    
-        var uri = '/endpoint.php';
-        new Ajax(uri, {
-            method: 'POST',
-            postBody: formData,
-            onSuccess: function(obj) {
-                if(obj && obj.responseJSON) {
-                    var req = obj.responseJSON;
-                }
-            }, 
-            onFailure: function() {
-                Ink.warn('Ajax request failed');
-            }
-        });    
-    }
-  
-    InkEvent.observe(form, 'submit', doPost);
-});
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-   
-   
-   </div>
-
-<!-- 
-            <div class="ink-grid vertical-space">
-                <h1>heading</h1>
-                <p>And though of all men the moody captain of the Pequod was the least given to that sort of shallowest assumption; and though the only homage he ever exacted, was implicit, instantaneous obedience; though he required no man to remove the shoes from his feet ere stepping upon the quarter-deck; and though there were times when, owing to peculiar circumstances connected with events hereafter to be detailed, he addressed them in unusual terms, whether of condescension or IN TERROREM, or otherwise; yet even Captain Ahab was by no means unobservant of the paramount forms and usages of the sea.</p>
-            </div>
-            <div class="push"></div>
- -->
- 
-
-<form class="ink-form vertical-space">
-    <div class="control-group all-33">
-        <label for="email">Email</label>
-        <div class="control">
-            <input id="email" name="email" type="text" placeholder="Type some text">
-        </div>
-        <div class="space"></div>
-        <input type="submit" value="Search" class="ink-button green">
-    </div>
-</form>
-
-<div class="ink-grid">
-  <div class="column-group vertical-gutters vertical">
-
-
-
-    <div class="all-100">
-      <div class="column">column 1</div>
-    </div>
-    <div class="all-100">
-      <div class="column">column 2</div>
-    </div>
-    <div class="all-100">
-      <div class="column">column 3</div>
-    </div>
-  </div>
-</div>
-
-<div class="ink-grid">
-  <div class="column-group">
-    <div class="all-15">
-      ...
-    </div>
-    <div class="all-70">
-      ...
-    </div>
-    <div class="all-15">
-      ...
-    </div>
-  </div>
-</div>
-
-
-
-
-<form id="form" method="post" action="#">
-  <p>
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name">
-  </p>
-  <p>
-    <label for="email">Email:</label>
-    <input type="text" id="email" name="email">
-  </p>
-  <p>Choices:</p> 
-  <p>
-    <input type="checkbox" name="choice[]" id="choice_a" value="A"> <label for="choice_a">A</label>
-  </p>
-  <p>
-    <input type="checkbox" name="choice[]" id="choice_b" value="B"> <label for="choice_b">B</label>
-  </p>
-  <p><button type="submit">Submit</button></p>
-</form>
-<script>
-Ink.requireModules(['Ink.Net.Ajax_1', 'Ink.Dom.Event_1', 'Ink.Dom.FormSerialize_1'], function(Ajax, InkEvent, FormSerialize) {
-
-    var form = Ink.i('form');
-  
-    function doPost(event) {
-        InkEvent.stopDefault(event);
-
-        var formData = FormSerialize.serialize(form);
-    
-        var uri = '/endpoint.php';
-        new Ajax(uri, {
-            method: 'POST',
-            postBody: formData,
-            onSuccess: function(obj) {
-                if(obj && obj.responseJSON) {
-                    var req = obj.responseJSON;
-                }
-            }, 
-            onFailure: function() {
-                Ink.warn('Ajax request failed');
-            }
-        });    
-    }
-  
-    InkEvent.observe(form, 'submit', doPost);
-});
-</script>
-
-
-<!--             
-        <div id="car1" class="ink-carousel" data-space-after-last-slide="false" data-autoload="false">
-
-            <ul class="stage column-group half-gutters">
-
-                <li class="slide xlarge-25 large-25 medium-33 small-50 tiny-100">
-                    <img class="half-bottom-space" src="http://lorempixel.com/400/200/sports/1">
-                    <div class="description">
-                        <h4 class="no-margin">Highlight Title</h4>
-                        <h5 class="slab">Baby Doe</h5>
-                        <p>É importante questionar o quanto a constante divulgação das informações ainda não demonstrou convincentemente que vai participar na mudança do impacto na agilidade decisória.</p>
-                    </div>
-                </li>
-
-                <li class="slide xlarge-25 large-25 medium-33 small-50 tiny-100">
-                    <img class="half-bottom-space" src="http://lorempixel.com/400/200/sports/2">
-                    <div class="description">
-                        <h4 class="no-margin">Highlight Title</h4>
-                        <h5 class="slab">Baby Doe</h5>
-                        <p>Devemos cultivar os nossos soft powers sagrados</p>
-                    </div>
-                </li>
-
-                <li class="slide xlarge-25 large-25 medium-33 small-50 tiny-100">
-                    <img class="half-bottom-space" src="http://lorempixel.com/400/200/sports/3">
-                    <div class="description">
-                        <h4 class="no-margin">Highlight Title</h4>
-                        <h5 class="slab">Baby Doe</h5>
-                        <p>Rumo ao inconseguimento de cenas</p>
-                    </div>
-                </li>
-
-                <li class="slide xlarge-25 large-25 medium-33 small-50 tiny-100">
-                    <img class="half-bottom-space" src="http://lorempixel.com/400/200/sports/4">
-                    <div class="description">
-                        <h4 class="no-margin">Highlight Title</h4>
-                        <h5 class="slab">Baby Doe</h5>
-                        <p>É importante questionar o quanto a constante divulgação das informações ainda não demonstrou convincentemente que vai participar na mudança do impacto na agilidade decisória.</p>
-                    </div>
-                </li>
-
-                <li class="slide xlarge-25 large-25 medium-33 small-50 tiny-100">
-                    <img class="half-bottom-space" src="http://lorempixel.com/400/200/sports/5">
-                    <div class="description">
-                        <h4 class="no-margin">Highlight Title</h4>
-                        <h5 class="slab">Baby Doe</h5>
-                        <p>É importante questionar o quanto a constante divulgação das informações ainda não demonstrou convincentemente que vai participar na mudança do impacto na agilidade decisória.</p>
-                    </div>
-                </li>
-
-                <li class="slide xlarge-25 large-25 medium-33 small-50 tiny-100">
-                    <img class="half-bottom-space" src="http://lorempixel.com/400/200/sports/6">
-                    <div class="description">
-                        <h4 class="no-margin">Highlight Title</h4>
-                        <h5 class="slab">Baby Doe</h5>
-                        <p>É importante questionar o quanto a constante divulgação das informações ainda não demonstrou convincentemente que vai participar na mudança do impacto na agilidade decisória.</p>
-                    </div>
-                </li>
-
-                <li class="slide xlarge-25 large-25 medium-33 small-50 tiny-100">
-                    <img class="half-bottom-space" src="http://lorempixel.com/400/200/sports/7">
-                    <div class="description">
-                        <h4 class="no-margin">Highlight Title</h4>
-                        <h5 class="slab">Baby Doe</h5>
-                        <p>É importante questionar o quanto a constante divulgação das informações ainda não demonstrou convincentemente que vai participar na mudança do impacto na agilidade decisória.</p>
-                    </div>
-                </li>
-
-                <li class="slide xlarge-25 large-25 medium-33 small-50 tiny-100">
-                    <img class="half-bottom-space" src="http://lorempixel.com/400/200/sports/8">
-                    <div class="description">
-                        <h4 class="no-margin">Highlight Title</h4>
-                        <h5 class="slab">Baby Doe</h5>
-                        <p>É importante questionar o quanto a constante divulgação das informações ainda não demonstrou convincentemente que vai participar na mudança do impacto na agilidade decisória.</p>
-                    </div>
-                </li>
-
-                <li class="slide xlarge-25 large-25 medium-33 small-50 tiny-100">
-                    <img class="half-bottom-space" src="http://lorempixel.com/400/200/sports/9">
-                    <div class="description">
-                        <h4 class="no-margin">Highlight Title</h4>
-                        <h5 class="slab">Baby Doe</h5>
-                        <p>É importante questionar o quanto a constante divulgação das informações ainda não demonstrou convincentemente que vai participar na mudança do impacto na agilidade decisória.</p>
-                    </div>
-                </li>
-            </ul>
-
-        </div>
-
- 
-        <nav id="p1" class="ink-navigation">
-            <ul class="pagination black">
-            </ul>
-        </nav>
--->
-    </div>
-
-<!-- 
-    <script>
-        Ink.requireModules(['Ink.UI.Carousel_1'], function(InkCarousel) {
-            new InkCarousel('#car1', {pagination: '#p1'});
-        });
-    </script>
- -->
-     
 </div>
     </div>
   </div>
 </div>
 
-
-
-
-
-    
-<!--
-        <footer class="clearfix">
-            <div class="ink-grid">
-                <ul class="unstyled inline half-vertical-space">
-                    <li class="active"><a href="#">About</a></li>
-                    <li><a href="#">Sitemap</a></li>
-                    <li><a href="#">Contacts</a></li>
-                </ul>
-                <p class="note">Identification of the owner of the copyright, either by name, abbreviation, or other designation by which it is generally known.</p>
-            </div>
-        </footer>
--->
 <footer class="bar-bottom">
             <ul class="unstyled">
                 <li class="hide-all show-tiny tiny">TINY</li>

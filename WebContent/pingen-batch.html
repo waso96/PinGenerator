@@ -1,10 +1,59 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<h2>Generate Pin / Batch</h2>
+<form id="form" class="ink-form vertical-space">
+<div class="control-group required">
+	<label for="pin-digit">Pin Digit</label>
+	<div class="control">
+<!-- 
+	<select id="pin-digit" style="width:15em;">
+		<option value="15">15</option>
+		<option value="14">14</option>
+		<option value="13">13</option>
+		<option value="12" selected>12</option>
+		<option value="11">11</option>
+		<option value="10">10</option>
+		<option value="9">9</option>
+		<option value="8">8</option>
+	</select>
+ -->
+	<input id="test" type="number" style="width:15em;" min="1" max="15" placeholder="No. of Pin" value="8">
+	</div>
+</div>
+<div class="control-group required">
+	<label for="pin-amount">Pin Amount</label>
+	<div class="control">
+	    <input id="pin-amount" name="pin-amount" style="width:15em;" type="text" placeholder="No. of Pin">
+	</div>
+</div>
 
-</body>
-</html>
+	<input type="submit" value="Generate" class="ink-button green">
+	<input type="submit" value="Cancel" class="ink-button red">
+</form>
+
+<script>
+Ink.requireModules(['Ink.Net.Ajax_1', 'Ink.Dom.Event_1', 'Ink.Dom.FormSerialize_1'], function(Ajax, InkEvent, FormSerialize) {
+
+    var form = Ink.i('form');
+  
+    function doPost(event) {
+        InkEvent.stopDefault(event);
+
+        var formData = FormSerialize.serialize(form);
+    
+        var uri = 'PinGen';
+        new Ajax(uri, {
+            method: 'POST',
+            postBody: formData,
+            onSuccess: function(obj) {
+                if(obj && obj.responseJSON) {
+                    var req = obj.responseJSON;
+                }
+            }, 
+            onFailure: function() {
+                Ink.warn('Ajax request failed');
+            }
+        });    
+    }
+  
+    InkEvent.observe(form, 'submit', doPost);
+});
+</script>
