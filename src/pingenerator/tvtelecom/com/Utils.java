@@ -9,6 +9,9 @@ package pingenerator.tvtelecom.com;
 
 public class Utils {
     public static String CharacterEncoding = "UTF-8";
+    
+    
+    
     public static String csvFileForProvince = "/Single/SingleData/province.csv";
     public static String csvFileForProvinceSplitBy = ",";   //    "\\t";
     
@@ -36,4 +39,8 @@ public class Utils {
     public static String OMUsernamePassword = "intecsubmitter:intecsubmitter";
     public static String OMURL = "http://172.24.89.58/totom/services/SyncOrderInterface";
     //public static String OMURL = "http://localhost:8800/HistoryCOrderOMServiceForTest";
+    
+    public static String dbpath() {
+    	return System.getProperty("user.dir");
+    }
 }

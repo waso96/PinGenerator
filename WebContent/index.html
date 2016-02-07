@@ -43,8 +43,8 @@
         <script type="text/javascript">
             Ink.requireModules(['Ink.Dom.Loaded_1','Ink.Util.Url_1'], function (DomLoaded,InkUrl) { 
               DomLoaded.run(function(){
-            	  url = InkUrl.getUrl();
-                  alert(window.url);
+            	  url_home = InkUrl.getUrl();
+                  //alert(window.url);
               });
             });  
         </script>
@@ -67,7 +67,7 @@
 <div id="bar-top">
     <nav class="ink-navigation ink-grid">
        	<ul class="menu horizontal push-left">
-            <li class="active"><a href="#" class="logoPlaceholder" >CAT</a></li>
+            <li class="active"><a onclick="goHome();" class="logoPlaceholder" >CAT</a></li>
         </ul>
         <ul class="menu horizontal push-right">
             <li><a href="#">item</a></li>
@@ -81,7 +81,7 @@
     <div class="menu-left">
 <nav class="ink-navigation vertical-space">
     <ul class="menu vertical blue">
-        <li class="heading active"><a><i class="fa fa-credit-card"></i>&nbsp;&nbsp;&nbsp;Pin Generator</a></li>
+        <li class="heading active"><a onclick="goHome();"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;&nbsp;Pin Generator</a></li>
         <li class="submenu">
             <a>Generate PIN<i class="fa fa-chevron-right push-right space-top-font"></i></a>
             <ul class="submenu flyout right" style="background:#ddd;color:white;">
