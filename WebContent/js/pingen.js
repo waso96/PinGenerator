@@ -22,14 +22,13 @@ function pinGenButtonGenerateClick() {
 
         var formData = FormSerialize.serialize(form);
         //Ink.log(formData);
-        var uri = window.url_home + 'PinGen';
+        var uri = window.url_home + 'PinGenBatch';
         new Ajax(uri, {
             method: 'POST',
             postBody: formData,
             onSuccess: function(obj) {
                 if(obj && obj.responseJSON) {
                 	Ink.log("success " + obj.responseJSON['jobId']);
-
                 }
             }, 
             onFailure: function() {
