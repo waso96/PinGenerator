@@ -49,12 +49,12 @@
                       postBody: "",
                       onSuccess: function(obj) {
                           if(obj && obj.responseJSON) {
-                          	Ink.log("success " + obj.responseJSON['jobId']);
-
+                          	Ink.log("result: " + obj.responseJSON['result']);
+                          	Ink.log("jobId: " + obj.responseJSON['jobId']);
                           }
                       }, 
                       onFailure: function() {
-                          //Ink.warn('Ajax request failed');
+                    	  Ink.log("result: failed on network!");
                       }
                   });
               });
