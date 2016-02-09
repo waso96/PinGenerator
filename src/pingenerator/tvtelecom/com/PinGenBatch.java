@@ -2,6 +2,9 @@ package pingenerator.tvtelecom.com;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -76,6 +79,24 @@ LOG.log(Level.SEVERE, ex.getMessage(), ex);
 LOG.log(Level.WARNING, ex.getMessage(), ex);
 				result = "failed";
 		    }
+		}
+
+		if (!result.equals("failed")) {
+			URLConnection urlcon;
+			try {
+LOG.log(Level.INFO,"{0}-{1}",new Object[]{"test",request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/PinGenerator/"+"PinGenBatchX"});
+				URL url = new URL(request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/PinGenerator/"+"PinGenBatchX");
+				urlcon = url.openConnection();
+				urlcon.setConnectTimeout(100);
+				urlcon.setReadTimeout(100);
+LOG.log(Level.INFO,"{0}-{1}",new Object[]{"call PinGenBatchX",urlcon.getDate()});
+			} catch (MalformedURLException e) { 
+				LOG.log(Level.SEVERE, e.getMessage(), e);
+				result = "failed";
+			} catch (IOException e) {
+				LOG.log(Level.SEVERE, e.getMessage(), e);
+				result = "failed";
+			}
 		}
 
 		response.setContentType("application/json");
